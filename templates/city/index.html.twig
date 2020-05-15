@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les villes{% endblock %}
+
+{% block body %}
+    {{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
+    <main class="main-content container">
+
+        <h1>Liste des villes participantes</h1>
+        <h2>{{ cities|length }} villes pour l'instant, rejoignez-nous!</h2>
+
+
+        <div class="row row-cols-1 row-cols-md-4">
+
+            {% for city in cities  %}
+                <div class="col mb-4">
+                    <div class="card">
+                        <img src="{{asset('uploads/cities/' ~ city.picture) }}" class="card-img-top" alt="{{ city.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ city.name }}</h5>
+                            <a href="{{ path('city_show', {'name':city.name}) }}" class="btn btn-primary">
+                                <i class="fa fa-eye"></i>
+                                Voir les projets
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                    <span class="badge badge-pill badge-primary" title="Projets">
+                        <i class="fa fa-lightbulb-o"></i>
+                        {{ city.projects|length }} projets
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </main>
+{% endblock %}

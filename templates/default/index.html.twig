@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Initiaville{% endblock %}
+
+{% block body %}
+{{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
+
+    <div class="jumbotron">
+        <h1 class="display-4">InitiaVille</h1>
+        <p class="lead">Proposez des initiatives pour améliorer la vie en ville.</p>
+        <a class="btn btn-primary btn-lg" href="{{ path('city_index') }}" role="button">
+            <i class="fa fa-map-marker"></i>
+            Voir les villes
+        </a>
+        {% if app.user %}
+            <a class="btn btn-primary btn-lg" href="new-project.html" role="button">
+                <i class="fa fa-plus-circle"></i>
+                Proposer un nouveau projet
+            </a>
+        {% endif %}
+
+    </div>
+
+    <h2>Les 3 derniers projets proposés, à vous de jouer!</h2>
+    <div class="row row-cols-1 row-cols-md-3">
+    {% for project in projects %}
+        <div class="col mb-4">
+            {% include 'project/_card.html.twig' with {'project' : project} only %}
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

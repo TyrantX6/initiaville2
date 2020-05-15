@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets de la ville {{ city.name }}{% endblock %}
+
+{% block body %}
+    {{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
+    <main class="main-content container">
+        {% if city.projects|length == 0 %}
+            <h2> Pour le moment, {{ city.projects|length }} projet(s) pour la ville "{{ city.name }}", à vous de jouer!</h2>
+        {% else %}
+            <h2>{{ city.projects|length }} projet(s) pour la ville "{{ city.name }}", on continue comme ça!</h2>
+        {% endif %}
+
+
+        <div class="row row-cols-1 row-cols-md-3">
+
+            {% for project in city.projects  %}
+                <div class="col mb-4">
+                    {% include '/project/_card.html.twig' with {'project' : project} only %}
+                </div>
+            {% endfor %}
+        </div>
+
+    </main>
+{% endblock %}
