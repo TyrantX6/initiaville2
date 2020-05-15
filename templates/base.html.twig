@@ -8,7 +8,7 @@
         {% endblock %}
     </head>
     <body>
-
+    {{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
     <main class="main-content container">
         {% block body %}{% endblock %}
     </main>

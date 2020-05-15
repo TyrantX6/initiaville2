@@ -3,7 +3,6 @@
 {% block title %}Projets de la ville {{ city.name }}{% endblock %}
 
 {% block body %}
-    {{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
     <main class="main-content container">
         {% if city.projects|length == 0 %}
             <h2> Pour le moment, {{ city.projects|length }} projet(s) pour la ville "{{ city.name }}", à vous de jouer!</h2>

@@ -3,7 +3,6 @@
 {% block title %}Projets selon catégorie{% endblock %}
 
 {% block body %}
-{{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
     <main class="main-content container">
 
         <h2>{{ category.projects|length }} projet(s) dans la catégorie "{{ category.label }}"</h2>

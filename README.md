@@ -26,3 +26,4 @@ TODO
 * Au niveau du register, modification des labels en français avec typage en TextType::Class puis implémenatation de l'interface TextType dans les use et le form.
 * Traduction en français du formulaire de login avec la même méthode.
 * Dissimulation du bouton "Ajouter un projet" sous un bloc if app.user qui vérifie la connexion d'un utilisateur
+* relocalisation du render menu controller dansle fichier base et suppression de la ligne duppliquée dans les autres pages.
