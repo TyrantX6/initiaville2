@@ -25,3 +25,4 @@ TODO
 * changement de la route de logout vers la homepage
 * Au niveau du register, modification des labels en français avec typage en TextType::Class puis implémenatation de l'interface TextType dans les use et le form.
 * Traduction en français du formulaire de login avec la même méthode.
+* Dissimulation du bouton "Ajouter un projet" sous un bloc if app.user qui vérifie la connexion d'un utilisateur

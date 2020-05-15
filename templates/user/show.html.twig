@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+{{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
+<h1>Mon compte</h1>
+
+<form>
+    <div class="form-group">
+        <label for="input-firstname">Prénom</label>
+        <input type="text" class="form-control" id="input-firstname" value="{{ user.firstname }}">
+    </div>
+    <div class="form-group">
+        <label for="input-lastname">Nom</label>
+        <input type="text" class="form-control" id="input-lastname" value="{{ user.lastname }}">
+    </div>
+    <div class="form-group">
+        <label for="input-email">Email</label>
+        <input type="email" class="form-control" id="input-email" value="{{ user.email }}">
+    </div>
+    <a href="{{ path('user_edit', {'email':app.user.email}) }}" class="btn btn-primary">Mettre à jour</a>
+</form>
+
+<hr>
+
+<h2>Mes projets</h2>
+    {% if user.projects|length == 0 %}
+        <p> Vous n'avez pas proposé de projets pour le moment, lancez vous! 🙂</p>
+    {% else %}
+        <div class="row row-cols-1 row-cols-md-2">
+            {% for project in user.projects  %}
+                <div class="col mb-4">
+                    <div class="card">
+                        <img src="{{asset('uploads/projects/' ~ project.picture) }}" class="card-img-top" alt="{{ project.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.excerpt }}</p>
+                            <a href="#" class="btn btn-primary">
+                                <i class="fa fa-eye"></i>
+                                Voir plus
+                            </a>
+                            <a href="#" class="btn btn-secondary">
+                                <i class="fa fa-pencil"></i>
+                                Modifier
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                                Supprimer
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            {% for category in project.categories  %}
+                                <span class="badge badge-pill badge-primary" title="Catégorie">
+                                <i class="fa fa-tag"></i> {{ category.label }}
+                                </span>
+                            {% endfor %}
+                            <span class="badge badge-pill badge-secondary" title="Ville">
+                                <i class="fa fa-map-marker"></i>
+                                {{ project.city.name }}
+                            </span>
+                            <span class="badge badge-pill badge-info" title="Date de proposition">
+                                <i class="fa fa-calendar"></i>
+                                Proposé le {{ project.createdAt|date('m/d/Y')}}
+                            </span>
+                            <span class="badge badge-pill badge-warning" title="Coût du projet">
+                                <i class="fa fa-euro"></i>
+                                {{ project.cost }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="col mb-4">
+                <a href="new-project.html" class="btn btn-lg btn-block btn-success">
+                    <i class="fa fa-plus-circle"></i>
+                    Proposer un nouveau projet
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}
