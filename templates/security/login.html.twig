@@ -3,7 +3,6 @@
 {% block title %}Initiaville - Page de connexion{% endblock %}
 
 {% block body %}
-    {{ render(controller('App\\Controller\\DefaultController::catMenu')) }}
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

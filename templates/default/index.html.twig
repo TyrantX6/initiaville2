@@ -12,7 +12,7 @@
             Voir les villes
         </a>
         {% if app.user %}
-            <a class="btn btn-primary btn-lg" href="new-project.html" role="button">
+            <a class="btn btn-primary btn-lg" href="{{ path('project_new') }}" role="button">
                 <i class="fa fa-plus-circle"></i>
                 Proposer un nouveau projet
             </a>
