@@ -41,7 +41,8 @@ ___ Partie User, login, registration ___
 * Ajout du lien vers project new dans l'index et dans la page mon compte.
 * Ajout méthode toString sur Category.label user.email et city.name pour affichage des pages générées par le CRUD et corriger l'erreur fatale
 * Ajout du number format sur tous les costs des cards
-* Dans le builder du form pour l'édition de projet (project/edit.html.twig), mise en commentaires des champs non désirés, et label modifié pour un affichage en français.
+* Dans le builder du form pour l'édition de projet (project/edit.html.twig), mise en commentaires des champs non désirés, et label modifié pour un affichage en français. Price type sur le champ du cost
+
 
 ___ partie technique, upload, sécurisation ___
 * modification du fichier service/ config.yaml pour paramétrer les chemins d'uploads
@@ -50,4 +51,17 @@ ___ partie technique, upload, sécurisation ___
 * upload size augmenté en configurant le php.ini, options rajoutées dans le filetype du form edit.project pour que ça fonctionne
 * Dans ProjectType.php passage du champ picture en FileType pour récupérer le bouton Parcourir.
 * Composer require annotations pour préparer la sécurisation des routes
-* Sécurisation des routes dans city new edit et delete (admin) puis dans projet edit et delete (admin + utilisateur concérné). Méthode des annotations sur les routes et use IsGranted.
+* Sécurisation des routes dans city new edit et delete (admin) puis dans projet edit et delete (admin + utilisateur concerné). Méthode des annotations sur les routes et use IsGranted.
+* Mise en forme du project.new avec ajout des liens y menant. _form réutilisé et quasi-fonctionnel, ajout du User connecté automatiquement avec un setUser dans le projectController (new)
+* Installation easy admin avec composer req admin, lien vers admin caché derrière un role-admin dans le menu vers path-easyadmin
+* Changement du défault local en FR. Création du fichier de messages dans translation, modification des valeurs pour traduction.
+* Sécurisation en décommentant une ligne dans easyadmin.yaml
+* intégration du delete form dans la page edit pour pouvoir supprimer les projets depuis la page user. Mise en forme
+
+--- Bonus ---
+* Affichage des commentaires sous les postes avec une simple boucle sur project.comments. Adapatation du code HTML.
+* pour un meilleur formatage du temps et des heures composer req twig/intl-extra. Utilisation du format_datetime avec la locale fr
+* Ajout du contenu du comment new dans le controller project show avec paramètre setUser et comment
+* Ajout de la méthode post autour du form de l'include new comment pour que l'envoi de données se fasse bien en GET et non POST.
+* Ajout d'un if et d'un h3 pour que le bloc ajout de commentaire ne soit visible qu'avec un utilisateur connecté.
+

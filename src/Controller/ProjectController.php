@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Project;
+use App\Form\CommentType;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use App\Service\FileUploader;
@@ -48,10 +50,11 @@ class ProjectController extends AbstractController
             }
 
             $entityManager = $this->getDoctrine()->getManager();
+            $project->setUser($this->getUser());
             $entityManager->persist($project);
             $entityManager->flush();
 
-            return $this->redirectToRoute('project_index');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('project/new.html.twig', [
@@ -61,14 +64,35 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="project_show", methods={"GET"})
+     * @Route("/{id}", name="project_show", methods={"GET", "POST" })
      */
-    public function show(Project $project): Response
+    public function show(Project $project, Request $request): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment, [
+            'method' =>'POST'
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $comment->setUser($this->getUser());
+            $comment->setProject($project);
+
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('project_show', ['id' => $project->getId()]);
+        }
+
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'comment' => $comment,
+            'form' => $form->createView(),
         ]);
     }
+
+
 
     /**
      * @Route("/{id}/edit", name="project_edit", methods={"GET","POST"})
@@ -113,6 +137,7 @@ class ProjectController extends AbstractController
         if (!$this->isGranted("ROLE_ADMIN") && $this->getUser() !== $project->getUser()) {
             throw $this->createAccessDeniedException("Vous n'avez pas le droit de supprimer ce projet");
         }
+        $user=$this->getUser();
 
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -120,6 +145,6 @@ class ProjectController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('user_edit', ["email" => $user->getEmail() ]);
     }
 }

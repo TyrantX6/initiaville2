@@ -242,4 +242,11 @@ class Project
     public function prePersist() {
         $this->setCreatedAt(new \DateTime());
     }
+
+    public function __toString()
+    {
+        return $this->getUser()->getEmail();
+    }
+
+
 }

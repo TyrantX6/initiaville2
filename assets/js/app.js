@@ -15,4 +15,9 @@ import '../css/app.scss';
 import 'jquery';
 import 'bootstrap';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+let input = document.getElementById('project_pictureFile');
+
+input.addEventListener('change', function () {
+    let label = document.querySelector('.custom-file-label');
+    label.innerHTML = this.value;
+});

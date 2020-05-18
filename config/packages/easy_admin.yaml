@@ -1,0 +1,46 @@
+easy_admin:
+    entities:
+#        # List the entity class name you want to manage
+        City:
+            class: App\Entity\City
+            image_base_path: '%uploads_url%/cities'
+            form:
+                fields:
+                    - 'name'
+                    - { property: 'picturePath', type: 'file_upload', type_options: { upload_dir: 'public/uploads/cities' } }
+            list:
+                fields:
+                    - 'id'
+                    - 'name'
+                    - {property: 'picture', type: 'image'}
+                    - 'projects'
+        Project:
+            class: App\Entity\Project
+            form:
+                fields:
+                    - 'title'
+                    - { property: 'picture', type: 'file', upload_dir: 'public/uploads/projects' }
+                    - { property: 'cost', type: 'money', type_options: { currency: 'EUR' } }
+                    - 'excerpt'
+                    - 'description'
+
+        Category:
+            class: App\Entity\Category
+            form:
+                fields:
+                    - 'label'
+
+        User:
+            class: App\Entity\User
+            form:
+                fields:
+                    - { property: 'email', type: 'email'}
+                    - 'firstname'
+                    - 'lastname'
+
+        Comment:
+            class: App\Entity\Comment
+            form:
+                fields:
+                    - 'title'
+                    - 'content'

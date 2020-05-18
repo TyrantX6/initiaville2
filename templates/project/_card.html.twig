@@ -2,7 +2,7 @@
         <img src="{{asset('uploads/projects/' ~ project.picture)}}" class="card-img-top" alt="{{ project.title}}">
         <div class="card-body">
             <h5 class="card-title">{{ project.title }}</h5>
-            <p class="card-text">{{ project.description}}</p>
+            <p class="card-text">{{ project.excerpt}}</p>
             <a href="{{ path('project_show', {'id': project.id} )}}" class="btn btn-primary">
                 <i class="fa fa-eye"></i>
                 Voir plus

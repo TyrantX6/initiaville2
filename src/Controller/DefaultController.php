@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,8 +19,8 @@ class DefaultController extends AbstractController
 
         $projects = $em->getRepository(Project::class)->findBy(
             [],
-            ['createdAt' => 'DESC'], // le deuxième paramètre permet de définir l'ordre
-            3,// le troisième la limite
+            ['createdAt' => 'DESC'],    // le deuxième paramètre permet de définir l'ordre
+            3,                     // le troisième la limite
             0
         );
 
@@ -35,6 +36,9 @@ class DefaultController extends AbstractController
     ]);
     }
 
-
+    public function addCommentForm()
+    {
+        return $this->render('comment/_form.html.twig');
+    }
 
 }

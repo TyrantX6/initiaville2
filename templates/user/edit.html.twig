@@ -6,29 +6,16 @@
     <h1>Mon compte</h1>
     {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    {# ANCIEN CODE VENANT DU SHOW
-    <form>
-        <div class="form-group">
-            <label for="input-firstname">Prénom</label>
-            <input type="text" class="form-control" id="input-firstname" value="{{ user.firstname }}">
-        </div>
-        <div class="form-group">
-            <label for="input-lastname">Nom</label>
-            <input type="text" class="form-control" id="input-lastname" value="{{ user.lastname }}">
-        </div>
-        <div class="form-group">
-            <label for="input-email">Email</label>
-            <input type="email" class="form-control" id="input-email" value="{{ user.email }}">
-        </div>
-        <a href="{{ path('user_edit', {'email':app.user.email}) }}" class="btn btn-primary">Mettre à jour</a>
-    </form>
-    #}
 
     <hr>
 
     <h2>Mes projets</h2>
     {% if user.projects|length == 0 %}
         <p> Vous n'avez pas proposé de projets pour le moment, lancez vous! 🙂</p>
+        <a href="{{ path('project_new') }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-plus-circle"></i>
+            Proposer un nouveau projet
+        </a>
     {% else %}
         <div class="row row-cols-1 row-cols-md-2">
             {% for project in user.projects  %}
@@ -46,10 +33,8 @@
                                 <i class="fa fa-pencil"></i>
                                 Modifier
                             </a>
-                            <a href="{{path('project_delete', {'id': project.id}) }}" class="btn btn-danger">
-                                <i class="fa fa-trash"></i>
-                                Supprimer
-                            </a>
+                                {{ include('project/_delete_form.html.twig') }}
+
                         </div>
                         <div class="card-footer">
                             {% for category in project.categories  %}

@@ -34,6 +34,11 @@ class City
      */
     private $projects;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picturePath;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -52,6 +57,19 @@ class City
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPicturePath(): ?string
+    {
+        return $this->picturePath;
+    }
+
+    public function setPicturePath(?string $picturePath): self
+    {
+        $filename = $this->picturePath = $picturePath;
+        $this->setPicture(basename($filename));
 
         return $this;
     }
@@ -103,4 +121,6 @@ class City
     {
         return $this->getName();
     }
+
+
 }

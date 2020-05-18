@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Projets selon catégorie{% endblock %}
+{% block title %}Projets dans la catégorie{% endblock %}
 
 {% block body %}
     <main class="main-content container">
 
         <h2>{{ category.projects|length }} projet(s) dans la catégorie "{{ category.label }}"</h2>
-
+        <br>
 
         <div class="row row-cols-1 row-cols-md-3">
 

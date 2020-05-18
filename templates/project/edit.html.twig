@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Project{% endblock %}
+{% block title %}Édition du projet - {{ project.title }}{% endblock %}
 
 {% block body %}
-    <h1>Edit Project</h1>
+    <h1>Édition du projet - {{ project.title }}</h1>
 
     {{ include('project/_form.html.twig', {'button_label': 'Mise à jour'}) }}
     <br>
