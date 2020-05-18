@@ -39,7 +39,7 @@ class ProjectType extends AbstractType
                 'attr' => [
                     'placeholder' => $picPlaceholder
                 ],
-                'required' => $required
+                'required' => $required,
             ])
             ->add('cost', MoneyType::class, [
                 'label' => 'Coût du projet :',

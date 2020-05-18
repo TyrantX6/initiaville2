@@ -1,4 +1,20 @@
 easy_admin:
+    site_name: 'ADMINATOR EL DOMINATOR'
+    design:
+        assets:
+            css:
+                - 'css/admin.css'
+        brand_color: 'rgb(176,33,26)'
+        menu:
+            - { label: 'Entités'}
+            - { entity: 'Project', label: 'Projets'}
+            - { entity: 'City', label: 'Villes'}
+            - { entity: 'Category', label: 'Catégories'}
+            - { entity: 'User', label: 'Utilisateurs'}
+            - { entity: 'Comment', label: 'Modération'}
+            - { label : 'Liens'}
+            - { label: 'Retour au site', route: 'homepage' }
+
     entities:
 #        # List the entity class name you want to manage
         City:
@@ -16,6 +32,8 @@ easy_admin:
                     - 'projects'
         Project:
             class: App\Entity\Project
+            disabled_actions: ['edit']
+            image_base_path: '%uploads_url%/projects'
             form:
                 fields:
                     - 'title'
@@ -23,6 +41,13 @@ easy_admin:
                     - { property: 'cost', type: 'money', type_options: { currency: 'EUR' } }
                     - 'excerpt'
                     - 'description'
+            list:
+                fields:
+                    - 'title'
+                    - 'cost'
+                    - 'excerpt'
+                    - 'createdAt'
+                    - {property: 'picture', type: 'image'}
 
         Category:
             class: App\Entity\Category
@@ -40,6 +65,7 @@ easy_admin:
 
         Comment:
             class: App\Entity\Comment
+            disabled_actions: ['new']
             form:
                 fields:
                     - 'title'

@@ -64,4 +64,10 @@ ___ partie technique, upload, sécurisation ___
 * Ajout du contenu du comment new dans le controller project show avec paramètre setUser et comment
 * Ajout de la méthode post autour du form de l'include new comment pour que l'envoi de données se fasse bien en GET et non POST.
 * Ajout d'un if et d'un h3 pour que le bloc ajout de commentaire ne soit visible qu'avec un utilisateur connecté.
+* Création d'une property PicturePath sur l'entité City pour avoir un nom de photo exploitable dans l'interface easy admin. 
+* Ajout de conditions différenciées sur un new project ou edit project pour ne pas redemander une photo à l'utilisateur en cas de simple modification.
+* Ajout de code JS pour afficher le label dans les pictureupload des forms. Eventlistener.
+* Petits changement de route à la suppression d'un projet et d'un user.
+* Affinage du easy admin avec des disabled actions pour un résultat plus cohérent.
+* Refonte du menu easy admin, CSS en lien avec le thème d'initiaville, ajout lien vers le site, changement du titre.
 
